@@ -1,0 +1,19 @@
+{
+  "name": "covid19",
+  "version": "0.1.0",
+  "scripts": {
+    "develop": "babel-node ./src/app.js",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@mutix/graphql-phoenix": "^0.1.25",
+    "express": "^4.17.1",
+    "knex": "^0.21.4",
+    "next": "^9.5.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  }
+}
