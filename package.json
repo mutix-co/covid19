@@ -2,10 +2,10 @@
   "name": "covid19",
   "version": "0.1.0",
   "scripts": {
-    "develop": "babel-node ./src/app.js",
+    "develop": "node ./src/app.js",
     "test": "eslint ./src",
-    "build": "babel ./src -d ./dist --copy-files; next build ./src",
-    "start": "node ./dist/app.js"
+    "build": "next build ./src",
+    "start": "NODE_ENV=production node ./src/app.js"
   },
   "dependencies": {
     "@babel/cli": "^7.10.5",
