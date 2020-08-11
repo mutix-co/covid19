@@ -3,16 +3,25 @@
   "version": "0.1.0",
   "scripts": {
     "develop": "babel-node ./src/app.js",
-    "build": "next build",
-    "start": "next start"
+    "test": "eslint ./src",
+    "build": "babel ./src -d ./dist --copy-files; next build ./src",
+    "start": "node ./dist/app.js"
   },
   "dependencies": {
+    "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.1",
     "@babel/node": "^7.10.5",
     "@mutix/graphql-phoenix": "^0.1.25",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "express": "^4.17.1",
     "knex": "^0.21.4",
     "next": "^9.5.2",
+    "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   }
