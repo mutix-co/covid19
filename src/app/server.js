@@ -38,7 +38,7 @@ app.get('/healthz', async (req, res) => res.json({ database: await checkDatabase
 
 app.post('/api/signature', bodyParser.json(), async (req, res) => {
   const { key, data } = req.body;
-  if (/^[a-z0-9]+$/.test(key) === false || /^[a-z0-9]+$/.test(data) === false) {
+  if (/^[a-z0-9]+$/.test(key) === false || /^[a-z0-9:]+$/.test(data) === false) {
     res.status(400).send('Bad Request');
     return;
   }

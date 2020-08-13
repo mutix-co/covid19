@@ -28,13 +28,17 @@ export default function index() {
   return (
     <form onSubmit={onSubmit}>
       <Title>實聯制 | 電子化解決方案</Title>
+      <Note>本服務 Beta 測試中，將於 9月1日 正式提供服務</Note>
       <Note>使用準則</Note>
       <Note>1. 本服務為 AGPL 3.0 開源專案，由 mutix Co., Ltd.（以下簡稱本公司）維運，並免費提供使用</Note>
       <Note>2. 本公司不會對使用者、商家、非營利組織、政府及任何個人與組織收取任何費用</Note>
       <Note>
-        <span>3. 歡迎用戶至 </span>
+        <span>3. 想參與貢獻嗎？可至 </span>
         <Link href="https://github.com/mutix-co/covid19" target="github">https://github.com/mutix-co/covid19</Link>
-        <span> 貢獻程式碼，或捐款給長期關注公民隱私權的 開放文化基金會 或 台灣人權促進會</span>
+        <span> 貢獻程式碼、法律及教學文件，或捐款給長期關注隱私權的</span>
+        <Link href="https://ocf.tw/" target="ocf">開放文化基金會</Link>
+        <span>或</span>
+        <Link href="https://www.tahr.org.tw/" target="tahr">台灣人權促進會</Link>
       </Note>
       <Note>服務條款</Note>
       <Note>

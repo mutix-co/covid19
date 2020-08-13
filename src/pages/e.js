@@ -1,9 +1,12 @@
 import React, {
   useState, useReducer, useCallback, useEffect,
 } from 'react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { codec, JSONWebSecretBox } from 'jw25519';
+import {
+  decode32, encode32, convertStringToUnicode, JSONWebSecretBox,
+} from 'jw25519';
 import Input from '../components/Input';
 import CheckBox from '../components/CheckBox';
 import Button from '../components/Button';
@@ -28,7 +31,7 @@ export default function Event() {
 
   useEffect(() => {
     if (!key) return;
-    const tmp = codec.decode32(key);
+    const tmp = decode32(key);
 
     if (tmp.length !== 32) {
       router.push('/');
@@ -40,9 +43,13 @@ export default function Event() {
 
   const onSubmit = useCallback((e) => {
     const secretBox = new JSONWebSecretBox();
-    secretBox.encrypt({
-      realName, contactNumber, email, saved,
-    }, publicKey);
+    const signature = convertStringToUnicode(JSON.stringify({
+      realName, contactNumber, email,
+    }));
+
+    const pkey = encode32(secretBox.keyPair.publicKey);
+    const data = secretBox.encrypt(signature, publicKey);
+    axios.post('/api/signature', { key: publicKey, data: `${pkey}:${data}` });
     e.preventDefault();
   }, [realName, contactNumber, email, saved]);
 

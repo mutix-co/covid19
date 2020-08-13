@@ -31,8 +31,9 @@ describe('signature', () => {
       email: 'hi@mutix.co',
     }));
 
-    const data = secretBox.encrypt(signature, publicKey);
-    const result = await instance.post('/', { key: encode32(secretBox.keyPair.publicKey), data });
+    const pkey = encode32(secretBox.keyPair.publicKey);
+    const data = `:${secretBox.encrypt(signature, publicKey)}`;
+    const result = await instance.post('/', { key: encode32(secretBox.keyPair.publicKey), data: `${pkey}:${data}` });
     expect(result.data).toEqual({
       id: expect.stringMatching(/^[0-9a-f]{32}$/),
       timestamps: expect.any(Number),

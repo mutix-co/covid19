@@ -29,6 +29,8 @@ export default function App({ Component, pageProps }) {
         <meta property="og:title" content="實聯制 | 免費電子解決方案" />
         <meta property="og:description" content="以明確告知、僅存28天、禁止目的外利用、配合疫調、安全維護及資安防護為原則" />
         <meta property="og:image" content="https://covid19.mutix.co/images/cover.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <link rel="stylesheet" href="/styles/normalize.css?v=20200801" />
         <link rel="stylesheet" href="/styles/global.css?v=20200801" />
       </Head>
