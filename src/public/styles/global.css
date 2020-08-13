@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  font-size: 62.5%;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  overflow-x: hidden;
+  color: #040000;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", -apple-system,
+    "Avenir Next", PingFangTC-Light, HelveticaNeue-Light, "Helvetica Neue Light",
+    "Helvetica Neue", Helvetica, "Heiti TC", "LiHei Pro", Arial, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.6em;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  text-rendering: optimizeLegibility;
+  background: #fafafa;
+  font-feature-settings: "liga" on;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: #040000;
+  text-decoration: none;
+}
