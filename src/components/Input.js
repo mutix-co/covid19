@@ -9,6 +9,8 @@ const Container = styled.div`
 
 const Title = styled.div`
   width: 100%;
+  font-size: 1.2em;
+  line-height: 1.8em;
   font-weight: 500;
 `;
 

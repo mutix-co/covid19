@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   min-height: 100vh;
   padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 export default function App({ Component, pageProps }) {
