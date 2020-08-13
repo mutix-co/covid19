@@ -9,6 +9,9 @@ spec:
       containers:
         - name: app
           image: nginx
+          envFrom:
+          - configMapRef:
+              name: sql-postgresql
           ports:
             - containerPort: 3000
               name: http

@@ -6,6 +6,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:jest/recommended',
     'airbnb',
   ],
   parserOptions: {
@@ -17,8 +18,8 @@ module.exports = {
   },
   plugins: [
     'react',
-  ], 
-  rules: { 
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }], 
+  ],
+  rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   },
 };

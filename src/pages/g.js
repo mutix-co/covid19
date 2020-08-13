@@ -9,6 +9,7 @@ import Step from '../components/Step';
 import Button from '../components/Button';
 import ButtonBar from '../components/ButtonBar';
 import Note from '../components/Note';
+import Link from '../components/Link';
 
 const Code = styled.textarea`
   width: 100%;
@@ -41,7 +42,7 @@ const CutLine = styled.div`
   }
 `;
 
-const Url = styled.div`
+const Url = styled(Link)`
   width: 100%;
   overflow-wrap: break-word;
 `;
@@ -77,6 +78,9 @@ export default function Generator() {
     document.execCommand('copy');
   }, []);
   const onPrint = useCallback(() => window.print(), []);
+
+  const url = `https://covid19.mutix.co/e?key=${keyPair.publicKey}&t=${encodeURIComponent(title)}`;
+
   return (
     <div>
       <div>
@@ -100,9 +104,9 @@ export default function Generator() {
         <div>「防疫新生活運動」個資保護服務</div>
         <Note>- 個資已使用 x25519-xsalsa20-poly1305 技術加密</Note>
         <Note>- 個資將於 28 日後自動完全情除</Note>
-        <QRCode url={`https://covid19.mitix.co/e?key=${keyPair.publicKey}&t=${encodeURIComponent(title)}`} />
+        <QRCode url={url} />
         <ScannerTip>掃碼登錄實聯制措施</ScannerTip>
-        <Url>{`https://covid19.mitix.co/e?key=${keyPair.publicKey}&t=${encodeURIComponent(title)}`}</Url>
+        <Url href={url} target="form">{url}</Url>
       </div>
     </div>
   );

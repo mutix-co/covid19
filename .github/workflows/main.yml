@@ -14,8 +14,15 @@ env:
 
 jobs:
 
-  eslint:
+  test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 12
@@ -24,12 +31,16 @@ jobs:
           node-version: 12
       - name: Yarn
         run: yarn install
-      - name: Test
-        run: yarn test
+      - name: Test ESlint
+        run: yarn test:eslint
+      - name: Test Server
+        run: yarn test:server
+        env:
+          POSTGRES_PASSWORD: postgres
 
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
-    needs: eslint
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
