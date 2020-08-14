@@ -16,7 +16,8 @@ const Title = styled.div`
 
 const InputBar = styled.input`
   width: 100%;
-  padding: 10px;
+  height: 3em;
+  padding: 0 10px;
   background: transparent;
   border: 1px solid #767676;
   border-radius: 3px;

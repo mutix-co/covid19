@@ -9,6 +9,7 @@ import Step from '../components/Step';
 import Button from '../components/Button';
 import ButtonBar from '../components/ButtonBar';
 import Note from '../components/Note';
+import Item from '../components/Item';
 import Link from '../components/Link';
 
 const Code = styled.textarea`
@@ -70,7 +71,7 @@ export default function Generator() {
     const publicKey = codec.encode32(secretBox.keyPair.publicKey);
     const secretKey = codec.encode32(secretBox.keyPair.secretKey);
     setKeyPair({ publicKey, secretKey });
-    setUrl(`${location.origin}/e?key=${keyPair.publicKey}&t=${encodeURIComponent(title)}`);
+    setUrl(`${location.origin}/e?key=${publicKey}&t=${encodeURIComponent(title)}`);
   }, [title]);
 
   const onFocus = useCallback((e) => e.target.select(), []);
@@ -102,8 +103,8 @@ export default function Generator() {
         <CutLine />
         <Title>{title}</Title>
         <div>「防疫新生活運動」個資保護服務</div>
-        <Note>- 個資已使用 x25519-xsalsa20-poly1305 技術加密</Note>
-        <Note>- 個資將於 28 日後自動完全情除</Note>
+        <Item>- 個資已使用 x25519-xsalsa20-poly1305 技術加密</Item>
+        <Item>- 個資將於 28 日後自動完全情除</Item>
         <QRCode url={url} />
         <ScannerTip>掃碼登錄實聯制措施</ScannerTip>
         <Url href={url} target="form">{url}</Url>
