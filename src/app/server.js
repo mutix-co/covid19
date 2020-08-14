@@ -39,15 +39,17 @@ app.get('/healthz', async (req, res) => res.json({ database: await checkDatabase
 app.post('/api/signature', bodyParser.json(), async (req, res) => {
   const { key, data } = req.body;
   if (/^[a-z0-9]+$/.test(key) === false || /^[a-z0-9:]+$/.test(data) === false) {
-    res.status(400).send('Bad Request');
+    res.status(400).send('Bad a Request');
     return;
   }
 
   try {
-    const [result] = await sql('signature').insert({ key, data }).returning('*');
-    res.json({ id: result.id, timestamps: Date.now() });
+    const [result] = await sql('signature').insert({
+      key, data, createdAt: new Date(), updatedAt: new Date(),
+    }).returning('*');
+    res.json({ id: result.id, timestamps: Date.now() / 1000 });
   } catch (err) {
-    res.status(400).send('Save Failed');
+    res.status(500).send('Save Failed');
   }
 });
 
@@ -65,7 +67,7 @@ app.get('/api/signature/:id', async (req, res) => {
   }
 
   const timestamps = new Date(signature.createdAt).getTime();
-  res.json({ id, timestamps });
+  res.json({ id, timestamps: timestamps / 1000 });
 });
 
 (async () => {

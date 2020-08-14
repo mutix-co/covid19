@@ -20,6 +20,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-restricted-globals': [1, 'location'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   },
 };

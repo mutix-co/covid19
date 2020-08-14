@@ -61,15 +61,17 @@ export default function Generator() {
   const router = useRouter();
   const code = useRef(null);
   const [keyPair, setKeyPair] = useState({ publicKey: '', secretKey: '' });
+  const [url, setUrl] = useState('null');
+
+  const { t: title } = router.query;
 
   useEffect(() => {
     const secretBox = new JSONWebSecretBox();
     const publicKey = codec.encode32(secretBox.keyPair.publicKey);
     const secretKey = codec.encode32(secretBox.keyPair.secretKey);
     setKeyPair({ publicKey, secretKey });
-  }, []);
-
-  const { t: title } = router.query;
+    setUrl(`${location.origin}/e?key=${keyPair.publicKey}&t=${encodeURIComponent(title)}`);
+  }, [title]);
 
   const onFocus = useCallback((e) => e.target.select(), []);
   const onCopy = useCallback(() => {
@@ -78,8 +80,6 @@ export default function Generator() {
     document.execCommand('copy');
   }, []);
   const onPrint = useCallback(() => window.print(), []);
-
-  const url = `https://covid19.mutix.co/e?key=${keyPair.publicKey}&t=${encodeURIComponent(title)}`;
 
   return (
     <div>
