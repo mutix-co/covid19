@@ -29,12 +29,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Yarn
-        run: yarn install
+      - name: npm
+        run: npm install
       - name: Test ESlint
-        run: yarn test:eslint
+        run: npm run test:eslint
       - name: Test Server
-        run: yarn test:server
+        run: npm run test:server
         env:
           POSTGRES_PASSWORD: postgres
 
