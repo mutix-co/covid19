@@ -43,7 +43,7 @@ const CenterNote = styled(Note)`
 export default function Check() {
   const router = useRouter();
   const wrapper = React.useRef();
-  const [timestamps, setTimestamps] = useState(0);
+  const [timestamp, setTimestamp] = useState(0);
   const [url, setUrl] = useState('null');
   const { id, t: title } = router.query;
 
@@ -59,9 +59,9 @@ export default function Check() {
       try {
         const res = await axios.get(`/api/signature/${id}`);
         setUrl(`${location.origin}/c?id=${id}&t=${title}`);
-        setTimestamps(res.data.timestamps);
+        setTimestamp(res.data.timestamp);
       } catch (err) {
-        setTimestamps(false);
+        setTimestamp(false);
       }
     })();
   }, [id, title]);
@@ -81,8 +81,8 @@ export default function Check() {
         <Icon src="/images/check.png" />
         <div>
           <Note>實聯制登錄完成</Note>
-          <Note>{DateTime.fromSeconds(timestamps).toLocaleString(DateTime.DATE_FULL)}</Note>
-          <Note>{DateTime.fromSeconds(timestamps).toLocaleString(DateTime.TIME_SIMPLE)}</Note>
+          <Note>{DateTime.fromSeconds(timestamp).toLocaleString(DateTime.DATE_FULL)}</Note>
+          <Note>{DateTime.fromSeconds(timestamp).toLocaleString(DateTime.TIME_SIMPLE)}</Note>
         </div>
       </InfoBox>
       <QRCode url={url} />

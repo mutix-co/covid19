@@ -4,6 +4,7 @@ const next = require('next');
 const express = require('express');
 const sql = require('./sql');
 const signature = require('./api/signature');
+const events = require('./api/events');
 
 const { env } = process;
 
@@ -37,6 +38,7 @@ async function checkDatabase() {
 app.get('/healthz', async (req, res) => res.json({ database: await checkDatabase() }));
 
 signature(app);
+events(app);
 
 (async () => {
   if (env.JEST_WORKER_ID === undefined) await web.prepare();

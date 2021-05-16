@@ -11,9 +11,13 @@ module.exports = function signature(app) {
 
     try {
       const [result] = await sql('signature').insert({
-        key, data, createdAt: new Date(), updatedAt: new Date(),
+        key, ips: req.ips.join(';'), data, createdAt: new Date(), updatedAt: new Date(),
       }).returning('*');
-      res.json({ id: result.id, timestamps: Date.now() / 1000 });
+      res.json({
+        id: result.id,
+        ips: result.ips,
+        timestamp: Math.round(new Date(result.createdAt).getTime() / 1000),
+      });
     } catch (err) {
       res.status(500).send('Save Failed');
     }
@@ -32,7 +36,9 @@ module.exports = function signature(app) {
       return;
     }
 
-    const timestamps = new Date(result.createdAt).getTime();
-    res.json({ id, timestamps: timestamps / 1000 });
+    res.json({
+      id: result.id,
+      timestamp: Math.round(new Date(result.createdAt).getTime() / 1000),
+    });
   });
 };

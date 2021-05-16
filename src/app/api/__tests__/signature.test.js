@@ -13,7 +13,7 @@ describe('signature', () => {
     server = jest.requireActual('../../server');
     server.listen();
     const { port } = server.address();
-    const baseURL = `http://127.0.0.1:${port}/api/signature`;
+    const baseURL = `http://127.0.0.1:${port}/api`;
     instance = axios.create({ baseURL });
   });
 
@@ -32,20 +32,24 @@ describe('signature', () => {
     }));
 
     const pkey = encode32(secretBox.keyPair.publicKey);
-    const data = `:${secretBox.encrypt(signature, publicKey)}`;
-    const result = await instance.post('/', { key: encode32(secretBox.keyPair.publicKey), data: `${pkey}:${data}` });
+    const data = secretBox.encrypt(signature, publicKey);
+    const result = await instance.post('/signature', {
+      key: encode32(publicKey),
+      data: `${pkey}:${data}`,
+    });
     expect(result.data).toEqual({
       id: expect.stringMatching(/^[0-9a-f]{32}$/),
-      timestamps: expect.any(Number),
+      ips: '',
+      timestamp: expect.any(Number),
     });
     id = result.data.id;
   });
 
   test('get', async () => {
-    const result = await instance.get(`/${id}`);
+    const result = await instance.get(`/signature/${id}`);
     expect(result.data).toEqual({
       id: expect.stringMatching(/^[0-9a-f]{32}$/),
-      timestamps: expect.any(Number),
+      timestamp: expect.any(Number),
     });
   });
 });
