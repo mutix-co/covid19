@@ -9,8 +9,8 @@ describe('signature', () => {
   let id;
   beforeAll(async () => {
     sql = await knex.init('signature');
-    jest.doMock('../sql', () => sql);
-    server = jest.requireActual('../server');
+    jest.doMock('../../sql', () => sql);
+    server = jest.requireActual('../../server');
     server.listen();
     const { port } = server.address();
     const baseURL = `http://127.0.0.1:${port}/api/signature`;
