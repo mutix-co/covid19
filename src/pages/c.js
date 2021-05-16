@@ -3,8 +3,10 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import html2canvas from 'html2canvas';
 import QRCodeBox from '../components/QRCodeBox';
 import Note from '../components/Note';
+import styles from './c.module.css';
 
 const Title = styled.div`
   width: 100%;
@@ -40,6 +42,7 @@ const CenterNote = styled(Note)`
 
 export default function Check() {
   const router = useRouter();
+  const wrapper = React.useRef();
   const [timestamps, setTimestamps] = useState(0);
   const [url, setUrl] = useState('null');
   const { id, t: title } = router.query;
@@ -56,25 +59,39 @@ export default function Check() {
       try {
         const res = await axios.get(`/api/signature/${id}`);
         setUrl(`${location.origin}/c?id=${id}&t=${title}`);
-        setTimestamps(DateTime.fromSeconds(res.data.timestamps).toRelative());
+        setTimestamps(res.data.timestamps);
       } catch (err) {
         setTimestamps(false);
       }
     })();
   }, [id, title]);
 
+  const onScreenshot = async () => {
+    const canvas = await html2canvas(wrapper.current);
+    const download = document.createElement('a');
+    download.download = 'covid19.png';
+    download.href = canvas.toDataURL('image/jpeg');
+    download.click();
+  };
+
   return (
-    <div>
+    <div ref={wrapper}>
       {title && <Title>{title}</Title>}
       <InfoBox>
         <Icon src="/images/check.png" />
         <div>
           <Note>實聯制登錄完成</Note>
-          <Note>{timestamps}</Note>
+          <Note>{DateTime.fromSeconds(timestamps).toLocaleString(DateTime.DATE_FULL)}</Note>
+          <Note>{DateTime.fromSeconds(timestamps).toLocaleString(DateTime.TIME_SIMPLE)}</Note>
         </div>
       </InfoBox>
       <QRCode url={url} />
       <CenterNote>{id}</CenterNote>
+      <div className={styles.toolbar}>
+        <button type="button" className={styles.screenshot} onClick={onScreenshot}>
+          請出示此畫面截圖
+        </button>
+      </div>
     </div>
   );
 }

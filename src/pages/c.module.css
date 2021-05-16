@@ -1,0 +1,11 @@
+.toolbar {
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.screenshot {
+  padding: 8px 10px 10px 10px;
+  background: transparent;
+  border: 1px solid #3c3c3c;
+}
