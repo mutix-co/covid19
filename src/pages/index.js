@@ -1,8 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
-import Input from '../components/Input';
-import Note from '../components/Note';
+// import { useRouter } from 'next/router';
 import Item from '../components/Item';
 import Button from '../components/Button';
 import Link from '../components/Link';
@@ -17,18 +15,18 @@ const Title = styled.div`
 `;
 
 export default function index() {
-  const router = useRouter();
-  const [title, setTitle] = useState('');
+  // const router = useRouter();
+  // const [title, setTitle] = React.useState('');
 
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-    router.push({ pathname: '/g', query: { t: title } });
-  }, [title]);
+  // const onSubmit = React.useCallback((e) => {
+  //   e.preventDefault();
+  //   router.push({ pathname: '/g', query: { t: title } });
+  // }, [title]);
 
-  const onChange = useCallback((e) => setTitle(e.target.value), []);
+  // const onChange = React.useCallback((e) => setTitle(e.target.value), []);
 
   return (
-    <form onSubmit={onSubmit}>
+    <form>
       <Title>實聯制 | 電子化解決方案</Title>
       <Item>本服務 Beta 測試中，將於 9月1日 正式提供服務</Item>
       <Item>使用準則</Item>
@@ -76,9 +74,10 @@ export default function index() {
       <Item>8. 除重大災害或不可抗力之因素外，本機構確保 99.8% 的時間正常服務，但本機構不負任何損害賠償責任</Item>
       <Item>9. 本機構已設置資料保護長 (Data Protection Officer, DPO)，由 YUTING LIU (hi@mutix.co) 當任</Item>
       <Item>10. 本服務條款有關的爭議，除法律另有規定者外，均應依照中華民國法律予以處理，並以台灣台北地方法院為管轄法院</Item>
-      <Input title="店名或活動名稱" onChange={onChange} value={title} />
+      {/* <Input title="店名或活動名稱" onChange={onChange} value={title} />
       <Note>點擊「產生實聯制網址」後視同您已閱讀，瞭解並同意接受本服務條款</Note>
-      <Button type="submit">產生實聯制網址</Button>
+      <Button type="submit">產生實聯制網址</Button> */}
+      <Button type="button">本服務已不再提供產生新的網址</Button>
     </form>
   );
 }

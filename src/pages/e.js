@@ -74,6 +74,12 @@ export default function Event() {
   return (
     <form onSubmit={onSubmit}>
       <Title>{title}</Title>
+      <p>注意！</p>
+      <p>
+        <span>本服務將在 2021-06-30 後不再維護，推薦改用</span>
+        <a href="https://emask.taiwan.gov.tw/real/">「簡訊實聯制」</a>
+        <a href="https://emask.taiwan.gov.tw/real/">https://emask.taiwan.gov.tw/real/</a>
+      </p>
       <Input title="真實姓名 (Real Name)" onChange={onRealNameChange} value={realName} />
       <Input title="聯絡電話 (Contact Number)" type="tel" onChange={onContactNumberChange} value={contactNumber} />
       <Input title="電子郵件 (E-mail)" type="email" onChange={onEmailChange} value={email} />
